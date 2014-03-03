@@ -58,12 +58,14 @@ class Chef
         end
       end
 
+      # rpc mod for iam roles
       def connection
         @connection ||= begin
           connection = Fog::Compute.new(
             :provider => 'AWS',
-            :aws_access_key_id => Chef::Config[:knife][:aws_access_key_id],
-            :aws_secret_access_key => Chef::Config[:knife][:aws_secret_access_key],
+#            :aws_access_key_id => Chef::Config[:knife][:aws_access_key_id],
+#            :aws_secret_access_key => Chef::Config[:knife][:aws_secret_access_key],
+	    :use_iam_profile => true,
             :region => locate_config_value(:region)
           )
         end
